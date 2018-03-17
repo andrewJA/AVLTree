@@ -1,30 +1,19 @@
-#include <iostream>
-#include <vector>
-#include <set>
- 
-namespace AVLTree 
-{
+#include <tree.hpp>
+
     struct Node {
         int   data;
         Node* left;
         Node* right;
     };
-} 
- 
-namespace AVLTree 
-{
-    class TREE
-    { 
-    public:
- 
+    
         bool CorrectFunction(std::vector<int> a)
         {
             std::set<int> b;
             for (int i=0; i<a.size();++i)
             b.insert(a[i]);
             return (b.size()==a.size());
-        }
- 
+        };
+
         int ChosenFunction ()
         {
             int chosenValue;
@@ -39,24 +28,6 @@ namespace AVLTree
             std::cout<<"8. Завершить работу программы"<<std::endl;
             std::cin >> chosenValue;
             return chosenValue;
-        }
+        
     };
-}
- 
-int main(int argc, char* argv[])
-{ 
-    AVLTree::TREE obj;    
-    std::vector<int> a;
-    int chosenValue ;
- 
-    for (int i=1; i<argc; i++)
-        a.push_back(atoi(argv[i]));
-    if (obj.CorrectFunction(a)==1)
-        chosenValue=obj.ChosenFunction();
-    else
-    {
-        std::cout<<"Не все значения уникальны"<<std::endl;
-        chosenValue=8;
-    }
-    return 0;
-}
+

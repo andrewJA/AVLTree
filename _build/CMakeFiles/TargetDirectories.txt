@@ -1,0 +1,4 @@
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/edit_cache.dir
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/rebuild_cache.dir
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/tree-cli.dir
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/tree.dir
