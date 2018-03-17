@@ -1,5 +1,6 @@
 #include <tree.hpp>
-
+namespace AVLTree
+{
     struct Node {
         int   data;
         Node* left;
@@ -30,4 +31,5 @@
             return chosenValue;
         
     };
+}
 
