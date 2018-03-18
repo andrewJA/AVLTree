@@ -1,4 +1,8 @@
-/home/ay/andrewja/AVLTree/_build/CMakeFiles/edit_cache.dir
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/install.dir
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/list_install_components.dir
 /home/ay/andrewja/AVLTree/_build/CMakeFiles/rebuild_cache.dir
-/home/ay/andrewja/AVLTree/_build/CMakeFiles/tree-cli.dir
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/edit_cache.dir
 /home/ay/andrewja/AVLTree/_build/CMakeFiles/tree.dir
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/tree-cli.dir
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/install/strip.dir
+/home/ay/andrewja/AVLTree/_build/CMakeFiles/install/local.dir
