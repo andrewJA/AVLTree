@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/tree-cli.dir/examples/tree-cli.cpp.o  -o tree-cli -rdynamic libtree.a 
