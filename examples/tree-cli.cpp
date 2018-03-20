@@ -1,10 +1,11 @@
 
 #include <tree.hpp>
+
 using namespace AVLTree;
 
 int main(int argc, char* argv[])
 { 
-    AVLTree::TREE obj;    
+    AVLTree::TUI obj;    
     std::vector<int> a;
     int chosenValue ;
 
