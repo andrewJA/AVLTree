@@ -1,4 +1,5 @@
 #include <tree.hpp>
+
 namespace AVLTree
 {
     struct Node {
@@ -7,12 +8,19 @@ namespace AVLTree
         Node* right;
     };
     
-    bool TUI::CorrectFunction(std::vector<int> a)
+    std::vector<int> TUI::CorrectFunction(std::vector<int> a)
     {
         std::set<int> b;
         for (int i=0; i<a.size();++i)
         b.insert(a[i]);
-        return (b.size()==a.size());
+        if (b.size()==a.size()) {
+            return a;
+        } 
+        else {
+            a.clear();
+            std::for_each(b.begin(), b.end(), [&a](int const& n){ a.push_back(n); });  
+            return a;          
+        }
     };
 
     int TUI::ChosenFunction ()

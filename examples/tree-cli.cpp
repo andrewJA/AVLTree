@@ -9,14 +9,10 @@ int main(int argc, char* argv[])
     std::vector<int> a;
     int chosenValue ;
 
-    for (int i=1; i<argc; i++)
-       a.push_back(atoi(argv[i]));
-    if (obj.CorrectFunction(a)==1)
-        chosenValue=obj.ChosenFunction();
-    else
-    {
-        std::cout<<"Не все значения уникальны"<<std::endl;
-        chosenValue=8;
-    }
+    for (int i=1; i<argc; i++) a.push_back(atoi(argv[i]));
+        
+    a = obj.CorrectFunction(a);
+    // for_each(a.begin(), a.end(), [&a](int const& i){ std::cout << i << " "; });//для проверки 
+    chosenValue=obj.ChosenFunction();
 }
 

@@ -2,13 +2,14 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 namespace AVLTree 
 {
     class TUI
     { 
         public:
-            bool CorrectFunction(std::vector<int> a);
+            std::vector<int> CorrectFunction(std::vector<int> a);
             int ChosenFunction ();
     };
 
