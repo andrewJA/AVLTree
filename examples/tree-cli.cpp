@@ -13,7 +13,8 @@ int main(int argc, char *argv[])
 		a.push_back(atoi(argv[i]));
 
 	a = obj.CorrectFunction(a);
+	Tree tree(a);
 
 	chosenValue = obj.ChosenFunction();
-	obj.MakeDecision(chosenValue, a);
+	obj.MakeDecisionTree(chosenValue, &tree);
 }

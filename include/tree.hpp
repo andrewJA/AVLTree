@@ -6,20 +6,12 @@
 
 namespace AVLTree
 {
-class TUI
-{
-  public:
-	std::vector<int> CorrectFunction(std::vector<int> a);
-	int ChosenFunction();
-	void MakeDecision(int chosenValue, std::vector<int> a);
-};
-
 struct Node;
 
 //enum class traversal_order {pre, in, post};
 class Tree
 {
-  public:
+public:
 	Tree();
 	Tree(std::vector<int> treeList);
 	Tree(std::initializer_list<int> list);
@@ -38,7 +30,7 @@ class Tree
 
 	~Tree();
 
-  private:
+private:
 	int size(Node *root, int counter);
 	bool insert(Node *&root, int value);
 	int rightSize();
@@ -47,5 +39,13 @@ class Tree
 	Node *root;
 
 	std::vector<int> treeVector;
+};
+
+class TUI
+{
+public:
+	std::vector<int> CorrectFunction(std::vector<int> a);
+	int ChosenFunction();
+	void MakeDecisionTree(int chosenValue, Tree *tree);
 };
 }

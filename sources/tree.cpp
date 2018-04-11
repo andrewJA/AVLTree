@@ -55,17 +55,16 @@ int TUI::ChosenFunction()
 }
 
 //взаимодействие с пользователем
-void TUI::MakeDecision(int chosenValue, std::vector<int> a)
+void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 {
-	Tree tree(a);
 	switch (chosenValue)
 	{
 	case 1:
 	{
-		tree.show();
+		tree->show();
 
 		int chosenValue = this->ChosenFunction();
-		this->MakeDecision(chosenValue, a);
+		this->MakeDecisionTree(chosenValue, tree);
 		break;
 	}
 	case 2:
@@ -76,18 +75,18 @@ void TUI::MakeDecision(int chosenValue, std::vector<int> a)
 		std::cout << "c. Обратный обход" << std::endl;
 		std::cin >> choseOrder;
 		if (choseOrder == "a")
-			tree.print("pre");
+			tree->print("pre");
 		else if (choseOrder == "b")
-			tree.print("in");
+			tree->print("in");
 		else if (choseOrder == "c")
-			tree.print("post");
+			tree->print("post");
 		else
 		{
 			std::cout << "Неверный входной символ";
 		}
 
 		int chosenValue = this->ChosenFunction();
-		this->MakeDecision(chosenValue, a);
+		this->MakeDecisionTree(chosenValue, tree);
 		break;
 	}
 	case 3:
@@ -96,9 +95,9 @@ void TUI::MakeDecision(int chosenValue, std::vector<int> a)
 		std::cout << "Введите значение для нового узла:"
 				  << " ";
 		std::cin >> newValue;
-		a.push_back(newValue);
+		tree->insert(newValue);
 		int chosenValue = this->ChosenFunction();
-		this->MakeDecision(chosenValue, a);
+		this->MakeDecisionTree(chosenValue, tree);
 		break;
 	}
 	case 8:
@@ -115,7 +114,7 @@ void TUI::MakeDecision(int chosenValue, std::vector<int> a)
 		else
 		{
 			int chosenValue = this->ChosenFunction();
-			this->MakeDecision(chosenValue, a);
+			this->MakeDecisionTree(chosenValue, tree);
 		}
 		break;
 	}
@@ -171,7 +170,30 @@ bool Tree::insert(Node *&root, int value)
 	return true;
 }
 
+//удаление узла из дерева (приватная функция)
+// bool Tree::deleteNode(Node *&root, int value)
+// {
+
+// }
+//удаление (глобальная)
+// void Tree::remove(int value)
+// {
+// 	this->deleteNode(this->root, value);
+// }
+
+//поиск узла в дереве (приватная функция)
+// bool Tree::searchNode(Node *&root, int value)
+// {
+
+// }
+//поиск (глобальная)
+// void Tree::exists(int value)
+// {
+// 	this->deleteNode(this->root, value);
+// }
+
 // вставка значения (вызов из вне)
+
 void Tree::insert(int value)
 {
 	this->insert(this->root, value);
