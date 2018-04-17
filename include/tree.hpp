@@ -11,14 +11,14 @@ struct Node;
 //enum class traversal_order {pre, in, post};
 class Tree
 {
-public:
+  public:
 	Tree();
 	Tree(std::vector<int> treeList);
 	Tree(std::initializer_list<int> list);
 	//	Tree(const Tree& tree);
 	//	Tree(Tree&& tree);
-	void insert(int value);
-	//	bool exists(int value);
+	bool insert(int value);
+	bool exists(int value);
 	//	bool remove(int value);
 	//	bool save(const string& path);
 	//	bool load(const string& path);
@@ -30,9 +30,10 @@ public:
 
 	~Tree();
 
-private:
+  private:
 	int size(Node *root, int counter);
 	bool insert(Node *&root, int value);
+	bool exists(Node *&root, int value);
 	int rightSize();
 	void showTree(Node *root, int size);
 
@@ -43,7 +44,7 @@ private:
 
 class TUI
 {
-public:
+  public:
 	std::vector<int> CorrectFunction(std::vector<int> a);
 	int ChosenFunction();
 	void MakeDecisionTree(int chosenValue, Tree *tree);

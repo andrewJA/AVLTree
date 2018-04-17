@@ -91,11 +91,35 @@ void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 	}
 	case 3:
 	{
-		int newValue;
+		int insertValue;
 		std::cout << "Введите значение для нового узла:"
 				  << " ";
-		std::cin >> newValue;
-		tree->insert(newValue);
+		std::cin >> insertValue;
+		bool isInsert = tree->insert(insertValue);
+		if (!isInsert)
+		{
+			std::cout << "Узел уже существует в дереве" << std::endl;
+		}
+		int chosenValue = this->ChosenFunction();
+		this->MakeDecisionTree(chosenValue, tree);
+		break;
+	}
+	case 7:
+	{
+		int searchValue;
+		std::cout << "Введите значение для поиска:"
+				  << " ";
+		std::cin >> searchValue;
+		std::cout << std::endl;
+		bool isExist = tree->exists(searchValue);
+		if (isExist)
+		{
+			std::cout << "Узел найден 💃" << std::endl;
+		}
+		else
+		{
+			std::cout << "Узел не найден 🙇‍" << std::endl;
+		}
 		int chosenValue = this->ChosenFunction();
 		this->MakeDecisionTree(chosenValue, tree);
 		break;
@@ -170,33 +194,51 @@ bool Tree::insert(Node *&root, int value)
 	return true;
 }
 
+// вставка значения (вызов из вне)
+bool Tree::insert(int value)
+{
+	bool isExist = exists(value);
+	if (isExist)
+		return false;
+	return this->insert(this->root, value);
+}
+
 //удаление узла из дерева (приватная функция)
-// bool Tree::deleteNode(Node *&root, int value)
+// bool Tree::remove(Node *&root, int value)
 // {
 
 // }
 //удаление (глобальная)
-// void Tree::remove(int value)
+// bool Tree::remove(int value)
 // {
 // 	this->deleteNode(this->root, value);
 // }
 
 //поиск узла в дереве (приватная функция)
-// bool Tree::searchNode(Node *&root, int value)
-// {
-
-// }
-//поиск (глобальная)
-// void Tree::exists(int value)
-// {
-// 	this->deleteNode(this->root, value);
-// }
-
-// вставка значения (вызов из вне)
-
-void Tree::insert(int value)
+bool Tree::exists(Node *&root, int value)
 {
-	this->insert(this->root, value);
+	if (root->data == value)
+	{
+		return true;
+	}
+	else if ((root->data > value) && (root->left != nullptr))
+	{
+		return exists(root->left, value);
+	}
+	else if ((root->data < value) && (root->right != nullptr))
+	{
+		return exists(root->right, value);
+	}
+	else
+	{
+		return false;
+	}
+}
+
+//поиск (глобальная)
+bool Tree::exists(int value)
+{
+	this->exists(this->root, value);
 }
 
 //вывод дерева в различных прядках (III этап) (private)
