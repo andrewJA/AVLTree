@@ -54,6 +54,11 @@ int TUI::ChosenFunction()
 	return chosenValue;
 }
 
+void TUI::outStars()
+{
+	std::cout << "******************" << std::endl;
+}
+
 //взаимодействие с пользователем
 void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 {
@@ -75,14 +80,28 @@ void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 		std::cout << "c. Обратный обход" << std::endl;
 		std::cin >> choseOrder;
 		if (choseOrder == "a")
+		{
+			outStars();
 			tree->print("pre");
+			outStars();
+		}
 		else if (choseOrder == "b")
+		{
+			outStars();
 			tree->print("in");
+			outStars();
+		}
 		else if (choseOrder == "c")
+		{
+			outStars();
 			tree->print("post");
+			outStars();
+		}
 		else
 		{
+			outStars();
 			std::cout << "Неверный входной символ";
+			outStars();
 		}
 
 		int chosenValue = this->ChosenFunction();
@@ -92,13 +111,42 @@ void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 	case 3:
 	{
 		int insertValue;
+		outStars();
 		std::cout << "Введите значение для нового узла:"
 				  << " ";
 		std::cin >> insertValue;
+		outStars();
 		bool isInsert = tree->insert(insertValue);
 		if (!isInsert)
 		{
+			outStars();
 			std::cout << "Узел уже существует в дереве" << std::endl;
+			outStars();
+		}
+		else
+		{
+			outStars();
+			std::cout << "Узел успешно добавлен!" << std::endl;
+			outStars();
+		}
+		int chosenValue = this->ChosenFunction();
+		this->MakeDecisionTree(chosenValue, tree);
+		break;
+	}
+	case 4:
+	{
+		int removeValue;
+		outStars();
+		std::cout << "Введите значение для удаляемого узла:"
+				  << " ";
+		std::cin >> removeValue;
+		outStars();
+		bool isDelete = tree->remove(removeValue);
+		if (!isDelete)
+		{
+			outStars();
+			std::cout << "Узел не был найден в дереве" << std::endl;
+			outStars();
 		}
 		int chosenValue = this->ChosenFunction();
 		this->MakeDecisionTree(chosenValue, tree);
@@ -107,18 +155,23 @@ void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 	case 7:
 	{
 		int searchValue;
+		outStars();
 		std::cout << "Введите значение для поиска:"
 				  << " ";
 		std::cin >> searchValue;
-		std::cout << std::endl;
+		outStars();
 		bool isExist = tree->exists(searchValue);
 		if (isExist)
 		{
+			outStars();
 			std::cout << "Узел найден 💃" << std::endl;
+			outStars();
 		}
 		else
 		{
+			outStars();
 			std::cout << "Узел не найден 🙇‍" << std::endl;
+			outStars();
 		}
 		int chosenValue = this->ChosenFunction();
 		this->MakeDecisionTree(chosenValue, tree);
@@ -126,13 +179,17 @@ void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 	}
 	case 8:
 	{
+		outStars();
 		std::cout << "Вы уверены, что хотите выйти из программы ? (Да|Нет)" << std::endl;
 		std::string answer;
 		std::cin >> answer;
+		outStars();
 		std::transform(answer.begin(), answer.end(), answer.begin(), ::tolower);
 		if (answer == "да" || answer == "Да" || answer == "yes")
 		{
+			outStars();
 			std::cout << "Quit!" << std::endl;
+			outStars();
 			return;
 		}
 		else
@@ -144,7 +201,9 @@ void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 	}
 	default:
 	{
+		outStars();
 		std::cout << "Error" << std::endl;
+		outStars();
 		break;
 	}
 	}
@@ -204,15 +263,16 @@ bool Tree::insert(int value)
 }
 
 //удаление узла из дерева (приватная функция)
-// bool Tree::remove(Node *&root, int value)
-// {
+bool Tree::remove(Node *&root, int value)
+{
+	std::cout << "!" << std::endl;
+}
 
-// }
 //удаление (глобальная)
-// bool Tree::remove(int value)
-// {
-// 	this->deleteNode(this->root, value);
-// }
+bool Tree::remove(int value)
+{
+	this->remove(this->root, value);
+}
 
 //поиск узла в дереве (приватная функция)
 bool Tree::exists(Node *&root, int value)

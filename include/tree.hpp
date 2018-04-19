@@ -19,7 +19,7 @@ class Tree
 	//	Tree(Tree&& tree);
 	bool insert(int value);
 	bool exists(int value);
-	//	bool remove(int value);
+	bool remove(int value);
 	//	bool save(const string& path);
 	//	bool load(const string& path);
 	void print(std::string order, Node *root);
@@ -33,6 +33,7 @@ class Tree
   private:
 	int size(Node *root, int counter);
 	bool insert(Node *&root, int value);
+	bool remove(Node *&root, int value);
 	bool exists(Node *&root, int value);
 	int rightSize();
 	void showTree(Node *root, int size);
@@ -48,5 +49,6 @@ class TUI
 	std::vector<int> CorrectFunction(std::vector<int> a);
 	int ChosenFunction();
 	void MakeDecisionTree(int chosenValue, Tree *tree);
+	void outStars();
 };
 }
