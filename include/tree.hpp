@@ -33,7 +33,8 @@ class Tree
   private:
 	int size(Node *root, int counter);
 	bool insert(Node *&root, int value);
-	bool remove(Node *&root, int value);
+	Node *remove(Node *&root, int value);
+	Node *getMin(Node *&node);
 	bool exists(Node *&root, int value);
 	int rightSize();
 	void showTree(Node *root, int size);

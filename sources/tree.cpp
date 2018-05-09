@@ -148,6 +148,12 @@ void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 			std::cout << "Узел не был найден в дереве" << std::endl;
 			outStars();
 		}
+		else
+		{
+			outStars();
+			std::cout << "Узел был успещно удален" << std::endl;
+			outStars();
+		}
 		int chosenValue = this->ChosenFunction();
 		this->MakeDecisionTree(chosenValue, tree);
 		break;
@@ -262,16 +268,66 @@ bool Tree::insert(int value)
 	return this->insert(this->root, value);
 }
 
-//удаление узла из дерева (приватная функция)
-bool Tree::remove(Node *&root, int value)
+Node *Tree::getMin(Node *&root)
 {
-	std::cout << "!" << std::endl;
+	if (root == nullptr)
+	{
+		return root;
+	}
+	if (root->left == nullptr)
+	{
+		return root;
+	}
+	else
+	{
+		return getMin(root->left);
+	}
+}
+
+//удаление узла из дерева (приватная функция)
+Node *Tree::remove(Node *&root, int value)
+{
+	if (root == nullptr)
+	{
+		return nullptr;
+	}
+	if (value == root->data)
+	{
+		if (root->left != nullptr && root->right != nullptr)
+		{
+			//Find Minimum from Right Tree OR find Maximum from Left Tree.
+			root->data = this->getMin(root->right)->data;
+			root->right = remove(root->right, root->data);
+		}
+		else if (root->left == nullptr)
+		{
+			return root->right;
+		}
+		else
+		{
+			return root->left;
+		}
+	}
+	else if (value > root->data)
+	{
+		root->right = remove(root->right, value);
+	}
+	else
+	{
+		root->left = remove(root->left, value);
+	}
+	return root;
 }
 
 //удаление (глобальная)
 bool Tree::remove(int value)
 {
-	this->remove(this->root, value);
+	Node *deletedNode = this->remove(this->root, value);
+	std::cout << deletedNode->data << std::endl;
+	if (deletedNode == nullptr)
+		return false;
+	else
+		return true;
 }
 
 //поиск узла в дереве (приватная функция)
