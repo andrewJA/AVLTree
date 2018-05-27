@@ -3,6 +3,7 @@
 #include <set>
 #include <algorithm>
 #include <string>
+#include <fstream>
 
 namespace AVLTree
 {
@@ -11,7 +12,7 @@ struct Node;
 //enum class traversal_order {pre, in, post};
 class Tree
 {
-  public:
+public:
 	Tree();
 	Tree(std::vector<int> treeList);
 	Tree(std::initializer_list<int> list);
@@ -20,17 +21,21 @@ class Tree
 	bool insert(int value);
 	bool exists(int value);
 	bool remove(int value);
-	//	bool save(const string& path);
-	//	bool load(const string& path);
+	std::string printFile();
+	bool save();
+	bool save(std::string path);
+	bool load();
+	bool load(std::string path);
 	void print(std::string order, Node *root);
 	void print(std::string order);
+	bool fileExist(std::string path);
 	void show(); //	auto friend operator<<(ostream& stream, const Tree&) -> ostream& stream;
 	//	auto operator=(const Tree&) -> Tree&;
 	//	auto operator=(Tree&&) -> Tree&;
 
 	~Tree();
 
-  private:
+private:
 	int size(Node *root, int counter);
 	bool insert(Node *&root, int value);
 	Node *remove(Node *&root, int value);
@@ -38,6 +43,7 @@ class Tree
 	bool exists(Node *&root, int value);
 	int rightSize();
 	void showTree(Node *root, int size);
+	std::string privatePrintFile(Node *root, std::string output);
 
 	Node *root;
 
@@ -46,7 +52,7 @@ class Tree
 
 class TUI
 {
-  public:
+public:
 	std::vector<int> CorrectFunction(std::vector<int> a);
 	int ChosenFunction();
 	void MakeDecisionTree(int chosenValue, Tree *tree);
