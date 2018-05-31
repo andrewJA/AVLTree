@@ -462,21 +462,14 @@ void Tree::show()
 	}
 }
 
-std::string Tree::printFile()
-{
-	std::string res = this->privatePrintFile(this->root, "");
-	return res;
-}
-
-std::string Tree::privatePrintFile(Node *root, std::string output)
+void Tree::makeOutput(Node *root)
 {
 	if (root != nullptr)
 	{
-		output += " " + root->data;
-		this->privatePrintFile(root->left, output);
-		this->privatePrintFile(root->right, output);
+		this->output = this->output + std::to_string(root->data) + " ";
+		makeOutput(root->left);
+		makeOutput(root->right);
 	}
-	return output;
 }
 
 //сохраняем в файл
@@ -493,7 +486,9 @@ bool Tree::save()
 	if (!filecheck)
 	{
 		file.open(path);
-		file << this->printFile();
+		this->output = "";
+		this->makeOutput(this->root);
+		file << this->output;
 		file.close();
 		std::cout << "Сообщение было успешно сохранено" << std::endl;
 		return true;
@@ -505,7 +500,9 @@ bool Tree::save()
 		if (answer == "yes")
 		{
 			file.open(path);
-			file << this->printFile();
+			this->output = "";
+			this->makeOutput(this->root);
+			file << this->output;
 			file.close();
 			std::cout << "Сообщение было успешно сохранено" << std::endl;
 			return true;
@@ -528,14 +525,18 @@ bool Tree::save(std::string path)
 	if (!filecheck)
 	{
 		file.open(path);
-		file << this->printFile();
+		this->output = "";
+		this->makeOutput(this->root);
+		file << this->output;
 		file.close();
 		std::cout << "Сообщение было успешно сохранено" << std::endl;
 	}
 	else
 	{
 		file.open(path);
-		file << this->printFile();
+		this->output = "";
+		this->makeOutput(this->root);
+		file << this->output;
 		file.close();
 		std::cout << "Сообщение было успешно сохранено" << std::endl;
 		filecheck.close();
