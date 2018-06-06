@@ -263,18 +263,22 @@ bool Tree::insert(Node *&root, int value)
 	if (root == nullptr)
 		root = new Node(value);
 	else if (value < root->data)
-		insert(root->left, value);
+	{
+		this->insert(root->left, value);
+	}
 	else
-		insert(root->right, value);
+	{
+		this->insert(root->right, value);
+	}
 	return true;
 }
 
 // вставка значения (вызов из вне)
 bool Tree::insert(int value)
 {
-	if (exists(value))
+	if (this->exists(value))
 		return false;
-	return insert(root, value);
+	return this->insert(root, value);
 }
 
 Node *Tree::getMin(Node *&root)
