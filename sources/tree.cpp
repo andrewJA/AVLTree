@@ -343,7 +343,7 @@ bool Tree::remove(int value)
 		return true;
 }
 
-Node *Tree::clear(Node *currNode)
+Node *Tree::clear(Node *&currNode)
 {
 	if (currNode == nullptr)
 	{
@@ -351,10 +351,11 @@ Node *Tree::clear(Node *currNode)
 	}
 	else
 	{
-		currNode->left = clear(currNode->left);
-		currNode->right = clear(currNode->right);
+		this->clear(currNode->left);
+		this->clear(currNode->right);
 		delete currNode;
 	}
+	return nullptr;
 }
 
 //поиск узла в дереве (приватная функция)
@@ -575,16 +576,15 @@ bool Tree::load()
 	}
 	else
 	{
-		if (root != nullptr)
-			clear(root);
+		if (this->root != nullptr)
+			clear(this->root);
 
 		int element;
 		while (file >> element)
 		{
-			this->insert(root, element);
+			insert(this->root, element);
 		}
-		std::cout
-			<< "Файл успешно считан" << std::endl;
+		std::cout << "Файл успешно считан" << std::endl;
 		return true;
 	}
 }

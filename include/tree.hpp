@@ -43,7 +43,7 @@ class Tree
 	bool exists(Node *&root, int value);
 	int rightSize();
 	void showTree(Node *root, int size);
-	Node *clear(Node *currNode);
+	Node *clear(Node *&currNode);
 
 	Node *root;
 	std::string output;
