@@ -32,4 +32,13 @@ TEST_CASE("output values should match input values", "[file]")
     REQUIRE(isWrite == true);
     bool isRead = tree.load(path);
     REQUIRE(isRead == true);
+
+    bool isInsert100 = tree.insert(100);
+    bool isInsert101 = tree.insert(101);
+    REQUIRE(isInsert100 == true);
+    REQUIRE(isInsert101 == true);
+
+    delete &tree;
+    REQUIRE(tree.exists(100) == false);
+    REQUIRE(tree.exists(101) == false);
 }

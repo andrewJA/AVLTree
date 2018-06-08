@@ -22,11 +22,8 @@ class Tree
 	bool exists(int value);
 	bool remove(int value);
 	void makeOutput(Node *root);
-	bool save();
 	bool save(std::string path);
-	bool load();
 	bool load(std::string path);
-	void print(std::string order, Node *root);
 	void print(std::string order);
 	bool fileExist(std::string path);
 	void show(); //	auto friend operator<<(ostream& stream, const Tree&) -> ostream& stream;
@@ -36,12 +33,11 @@ class Tree
 	~Tree();
 
   private:
-	int size(Node *root, int counter);
 	bool insert(Node *&root, int value);
+	void print(std::string order, Node *root);
 	Node *remove(Node *&root, int value);
 	Node *getMin(Node *&node);
 	bool exists(Node *&root, int value);
-	int rightSize();
 	void showTree(Node *root, int size);
 	Node *clear(Node *&currNode);
 

@@ -156,14 +156,14 @@ void TUI::MakeDecisionTree(int chosenValue, Tree *tree)
 	}
 	case 5:
 	{
-		tree->save();
+		tree->save("");
 		int chosenValue = this->ChosenFunction();
 		this->MakeDecisionTree(chosenValue, tree);
 		break;
 	}
 	case 6:
 	{
-		tree->load();
+		tree->load("");
 		int chosenValue = this->ChosenFunction();
 		this->MakeDecisionTree(chosenValue, tree);
 		break;
@@ -382,7 +382,7 @@ bool Tree::exists(Node *&root, int value)
 //поиск (глобальная)
 bool Tree::exists(int value)
 {
-	this->exists(this->root, value);
+	return this->exists(this->root, value);
 }
 
 //вывод дерева в различных прядках (III этап) (private)
@@ -431,23 +431,6 @@ void Tree::print(std::string order)
 	std::cout << "\n";
 }
 
-//размер правой ветки
-int Tree::size(Node *root, int counter)
-{
-	if (root->right != nullptr)
-	{
-		++counter;
-		counter = size(root->right, counter);
-	}
-	return counter;
-}
-
-int Tree::rightSize()
-{
-	int counter = 1;
-	return size(this->root, counter);
-}
-
 //вывод дерева на экран (private)
 void Tree::showTree(Node *root, int size)
 {
@@ -486,52 +469,16 @@ void Tree::makeOutput(Node *root)
 	}
 }
 
-//сохраняем в файл
-bool Tree::save()
-{
-	std::cout << "Введите путь к файлу" << std::endl;
-	std::string path;
-	std::string answer;
-	std::cin >> path;
-	std::ofstream file;
-	std::ifstream filecheck;
-	filecheck.open(path);
-
-	if (!filecheck)
-	{
-		file.open(path);
-		this->output = "";
-		this->makeOutput(this->root);
-		file << this->output;
-		file.close();
-		std::cout << "Сообщение было успешно сохранено" << std::endl;
-		return true;
-	}
-	else
-	{
-		std::cout << "Файл уже существует, перезаписать ? (yes/no)" << std::endl;
-		std::cin >> answer;
-		if (answer == "yes")
-		{
-			file.open(path);
-			this->output = "";
-			this->makeOutput(this->root);
-			file << this->output;
-			file.close();
-			std::cout << "Сообщение было успешно сохранено" << std::endl;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-		filecheck.close();
-	}
-}
-
 //с параметром path
-bool Tree::save(std::string path)
+bool Tree::save(std::string input_path)
 {
+	std::string path = input_path;
+	if (path == "")
+	{
+		std::cout << "Введите путь к файлу" << std::endl;
+		std::cin >> path;
+	}
+
 	std::ofstream file;
 	std::ifstream filecheck;
 	filecheck.open(path);
@@ -558,39 +505,15 @@ bool Tree::save(std::string path)
 	return true;
 }
 
-//загружаем из файла
-bool Tree::load()
+bool Tree::load(std::string input_path)
 {
-	std::cout << "Введите путь к файлу" << std::endl;
-	std::string path;
-	std::string stroka = "";
-	std::vector<int> vector;
-	std::cin >> path;
-	std::ifstream file;
-
-	file.open(path);
-	if (!file)
+	std::string path = input_path;
+	if (path == "")
 	{
-		std::cout << "Файл c заданным путем не существует" << std::endl;
-		return false;
+		std::cout << "Введите путь к файлу" << std::endl;
+		std::cin >> path;
 	}
-	else
-	{
-		if (this->root != nullptr)
-			clear(this->root);
 
-		int element;
-		while (file >> element)
-		{
-			insert(this->root, element);
-		}
-		std::cout << "Файл успешно считан" << std::endl;
-		return true;
-	}
-}
-
-bool Tree::load(std::string path)
-{
 	std::ifstream file;
 	file.open(path);
 	if (!file)
